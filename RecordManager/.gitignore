@@ -73,4 +73,4 @@ Thumbs.db
 
 # Project specific
 *.txt
-/build-RecordManager-Desktop-Debug/*
+../build-RecordManager-Desktop-Debug/*
