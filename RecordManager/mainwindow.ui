@@ -45,7 +45,7 @@
       <string>Login</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -107,6 +107,19 @@
        </layout>
       </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="test_DB">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>160</y>
+       <width>211</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
     </widget>
    </widget>
   </widget>

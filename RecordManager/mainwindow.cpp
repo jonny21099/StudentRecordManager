@@ -1,9 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
-#include <QFile>
-#include <iostream>
 #include <QTextStream>
+#include <QtSql>
 
 using namespace std;
 
@@ -22,21 +21,26 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_login_clicked()
 {
+    int numberOfRows=0;
     QString username = ui->lineEdit_username->text();
     QString password = ui->lineEdit_password->text();
-    QFile file("accounts.txt");
-    QString usercheck;
-    QString passcheck;
-    file.open(QIODevice::ReadOnly);
-    while(!file.atEnd()){
-        usercheck = file.readLine();
-        passcheck = file.readLine();
-        if(username == usercheck && password == passcheck){
-            QTextStream(stdout) << "string to print" << endl;
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("accounts.db");
+    if(!mydb.open()){
+        ui->test_DB->setText("Failed to open database");
+    }
+    else{
+        ui->test_DB->setText("Connected");
+        QSqlQuery query("SELECT * FROM loginInfo WHERE username = '"+username+"' AND password = '"+password+"'");
+        query.last();
+        numberOfRows=query.at()+1;
+        if(numberOfRows==1){
             userWindow = new User(this);
             userWindow->show();
         }
-        file.close();
+        else{
+            QMessageBox::warning(this,"Failure","Please enter a valid username and password.\nIf you don't have an account, please register with us.");
+        }
+        mydb.close();
     }
-    QMessageBox::warning(this,"Failure","Login Failed");
 }
