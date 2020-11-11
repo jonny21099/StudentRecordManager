@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "user.h"
+#include "register.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,8 +20,11 @@ public:
 private slots:
     void on_pushButton_login_clicked();
 
+    void on_pushButton_register_clicked();
+
 private:
     Ui::MainWindow *ui;
     User *userWindow;
+    Register *registerWindow;
 };
 #endif // MAINWINDOW_H

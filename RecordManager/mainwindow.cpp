@@ -18,7 +18,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_pushButton_login_clicked()
 {
     int numberOfRows=0;
@@ -27,10 +26,9 @@ void MainWindow::on_pushButton_login_clicked()
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("accounts.db");
     if(!mydb.open()){
-        ui->test_DB->setText("Failed to open database");
+        QMessageBox::warning(this,"File Not Found Error", "The database file cannot be find.");
     }
     else{
-        ui->test_DB->setText("Connected");
         QSqlQuery query("SELECT * FROM loginInfo WHERE username = '"+username+"' AND password = '"+password+"'");
         query.last();
         numberOfRows=query.at()+1;
@@ -43,4 +41,10 @@ void MainWindow::on_pushButton_login_clicked()
         }
         mydb.close();
     }
+}
+
+void MainWindow::on_pushButton_register_clicked()
+{
+    registerWindow = new Register(this);
+    registerWindow->show();
 }

@@ -18,14 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    register.cpp \
     user.cpp
 
 HEADERS += \
     mainwindow.h \
+    register.h \
     user.h
 
 FORMS += \
     mainwindow.ui \
+    register.ui \
     user.ui
 
 # Default rules for deployment.
