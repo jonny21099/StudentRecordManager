@@ -2,7 +2,10 @@
 #include "ui_register.h"
 #include <QMessageBox>
 #include <QtSql>
+#include <QTextStream>
+#include <regex>
 
+using namespace std;
 Register::Register(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Register)
@@ -22,12 +25,14 @@ void Register::on_buttonBox_accepted()
     QString username = ui->userName->text();
     QString password = ui->passWord->text();
     QString repassword = ui->rPassWord->text();
+    regex passwordcheck("^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,}$");
     if(firstName == "" || lastName == "" || username == "" || password == "" || repassword == ""){
-        QMessageBox::warning(this,"Invalid Entry", "Please make sure all fields are filled.");
+        QMessageBox::warning(this,"Error", "Please make sure all fields are filled.");
     }
     else if(password != repassword){
-        QMessageBox::warning(this,"Invalid Entry","Your passwords do not match!");
+        QMessageBox::warning(this,"Error","Your passwords do not match!");
     }
+    else if(!regex_match(password.toStdString(),passwordcheck)) QMessageBox::warning(this,"Error","Your password must contain minimum eight characters, at least one letter and one number.");
     else{
         QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
         mydb.setDatabaseName("accounts.db");
