@@ -10,6 +10,18 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -39,8 +51,23 @@
         <height>181</height>
        </rect>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>281</width>
+        <height>181</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>281</width>
+        <height>181</height>
+       </size>
+      </property>
       <property name="title">
        <string>Signin</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
       <widget class="QWidget" name="layoutWidget">
        <property name="enabled">
@@ -108,7 +135,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>30</x>
@@ -143,6 +170,18 @@
      </widget>
     </widget>
     <widget class="QWidget" name="userInfo">
+     <property name="minimumSize">
+      <size>
+       <width>831</width>
+       <height>601</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>831</width>
+       <height>601</height>
+      </size>
+     </property>
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
@@ -170,30 +209,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="option4">
+        <widget class="QPushButton" name="option1">
          <property name="text">
           <string>1. See all students</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="option3">
-         <property name="text">
-          <string>2. Check current payment</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="option2">
          <property name="text">
-          <string>3. Change password</string>
+          <string>2. View Calendar</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="option1">
+        <widget class="QPushButton" name="option3">
          <property name="text">
-          <string>4. Logout</string>
+          <string>3. Check payments</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="option4">
+         <property name="text">
+          <string>4. Change password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="option5">
+         <property name="text">
+          <string>5. Logout</string>
          </property>
         </widget>
        </item>

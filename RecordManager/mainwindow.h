@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "user.h"
 #include "register.h"
+#include "modifypassword.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,8 +22,21 @@ private slots:
 
     void on_pushButton_register_clicked();
 
+    void on_option1_clicked();
+
+    void on_option2_clicked();
+
+    void on_option3_clicked();
+
+    void on_option4_clicked();
+
+    void on_option5_clicked();
+
 private:
     Ui::MainWindow *ui;
     Register *registerWindow;
+    modifyPassword *modifyPasswordWindow;
+    QString username;
+    QString password;
 };
 #endif // MAINWINDOW_H

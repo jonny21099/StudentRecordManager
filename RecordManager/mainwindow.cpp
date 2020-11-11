@@ -21,15 +21,15 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_login_clicked()
 {
     int numberOfRows=0;
-    QString username = ui->lineEdit_username->text();
-    QString password = ui->lineEdit_password->text();
+    this->username = ui->lineEdit_username->text();
+    this->password = ui->lineEdit_password->text();
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("accounts.db");
     if(!mydb.open()){
         QMessageBox::warning(this,"File Not Found Error", "The database file cannot be find.");
     }
     else{
-        QSqlQuery query("SELECT * FROM loginInfo WHERE username = '"+username+"' AND password = '"+password+"'");
+        QSqlQuery query("SELECT * FROM loginInfo WHERE username = '"+username+"' AND password = '"+password+"';");
         query.last();
         numberOfRows=query.at()+1;
         if(numberOfRows==1){
@@ -40,6 +40,8 @@ void MainWindow::on_pushButton_login_clicked()
             QFont name_label_font = ui->name_label->font();
             name_label_font.setPointSize(25);
             name_label_font.setBold(true);
+            name_label_font.setCapitalization(QFont::AllUppercase);
+            name_label_font.setFamily("Helvetica");
             ui->name_label->setFont(name_label_font);
         }
         else{
@@ -54,3 +56,37 @@ void MainWindow::on_pushButton_register_clicked()
     registerWindow = new Register(this);
     registerWindow->show();
 }
+
+
+
+void MainWindow::on_option1_clicked()
+{
+
+}
+
+void MainWindow::on_option2_clicked()
+{
+
+}
+
+void MainWindow::on_option3_clicked()
+{
+
+}
+
+void MainWindow::on_option4_clicked()
+{
+    modifyPasswordWindow = new modifyPassword(username, password, this);
+    modifyPasswordWindow->show();
+
+}
+
+void MainWindow::on_option5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->lineEdit_username->setText("");
+    ui->lineEdit_password->setText("");
+}
+
+
+
