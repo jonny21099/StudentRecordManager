@@ -26,7 +26,7 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="page">
+    <widget class="QWidget" name="loginPage">
      <widget class="QGroupBox" name="groupBox">
       <property name="enabled">
        <bool>true</bool>
@@ -99,6 +99,9 @@
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
            </widget>
           </item>
          </layout>
@@ -139,7 +142,64 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_2"/>
+    <widget class="QWidget" name="userInfo">
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>60</y>
+        <width>458</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="name_label">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="option4">
+         <property name="text">
+          <string>1. See all students</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="option3">
+         <property name="text">
+          <string>2. Check current payment</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="option2">
+         <property name="text">
+          <string>3. Change password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="option1">
+         <property name="text">
+          <string>4. Logout</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

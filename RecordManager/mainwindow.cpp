@@ -33,8 +33,14 @@ void MainWindow::on_pushButton_login_clicked()
         query.last();
         numberOfRows=query.at()+1;
         if(numberOfRows==1){
-            userWindow = new User(this);
-            userWindow->show();
+            ui->stackedWidget->setCurrentIndex(1);
+            QString welcomeMessage = "Welcome";
+            welcomeMessage = welcomeMessage + ' ' + query.value(2).toString();
+            ui->name_label->setText(welcomeMessage);
+            QFont name_label_font = ui->name_label->font();
+            name_label_font.setPointSize(25);
+            name_label_font.setBold(true);
+            ui->name_label->setFont(name_label_font);
         }
         else{
             QMessageBox::warning(this,"Failure","Please enter a valid username and password.\nIf you don't have an account, please register with us.");

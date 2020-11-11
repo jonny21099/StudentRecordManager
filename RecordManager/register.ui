@@ -92,11 +92,17 @@
     </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="passWord">
+      <property name="inputMethodHints">
+       <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+      </property>
       <property name="maxLength">
        <number>1090</number>
       </property>
       <property name="frame">
        <bool>true</bool>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
       </property>
      </widget>
     </item>
@@ -109,8 +115,14 @@
     </item>
     <item row="4" column="1">
      <widget class="QLineEdit" name="rPassWord">
+      <property name="inputMethodHints">
+       <set>Qt::ImhNone</set>
+      </property>
       <property name="maxLength">
        <number>32767</number>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
       </property>
      </widget>
     </item>
