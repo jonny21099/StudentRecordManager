@@ -57,16 +57,16 @@ void MainWindow::on_pushButton_register_clicked()
     registerWindow->show();
 }
 
-
-
 void MainWindow::on_option1_clicked()
 {
-
+    viewstudents = new viewStudents(username, this);
+    viewstudents->show();
 }
 
 void MainWindow::on_option2_clicked()
 {
-
+     calendar = new Calendar(this);
+     calendar->show();
 }
 
 void MainWindow::on_option3_clicked()
@@ -78,7 +78,6 @@ void MainWindow::on_option4_clicked()
 {
     modifyPasswordWindow = new modifyPassword(username, password, this);
     modifyPasswordWindow->show();
-
 }
 
 void MainWindow::on_option5_clicked()

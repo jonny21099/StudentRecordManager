@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "register.h"
 #include "modifypassword.h"
+#include "calendar.h"
+#include "viewstudents.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,6 +38,8 @@ private:
     Ui::MainWindow *ui;
     Register *registerWindow;
     modifyPassword *modifyPasswordWindow;
+    Calendar *calendar;
+    viewStudents *viewstudents;
     QString username;
     QString password;
 };
