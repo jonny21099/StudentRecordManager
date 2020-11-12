@@ -1,10 +1,14 @@
 #include "studentmanagement.h"
 #include "ui_studentmanagement.h"
+#include <QMessageBox>
+#include <QtSql>
 
-studentManagement::studentManagement(QWidget *parent) :
+
+studentManagement::studentManagement(QString username, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::studentManagement)
 {
+    this->username = username;
     ui->setupUi(this);
     QFont information_font = ui->informationLabel->font();
     information_font.setPointSize(14);
@@ -23,4 +27,26 @@ studentManagement::studentManagement(QWidget *parent) :
 studentManagement::~studentManagement()
 {
     delete ui;
+}
+
+void studentManagement::on_buttonBox_accepted()
+{
+    QString firstname = ui->firstname->text();
+    QString lastname = ui->lastname->text();
+    QString DOB = ui->dateofbirth->text();
+    QString dayOfLessons = ui->dayOfLessonsBox->currentText();
+    QString startdate = ui->startdate->text();
+    QString pricing = ui->pricing->text();
+    QString lengthoflessons = ui->lengthoflessons->text();
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("accounts.db");
+    if(!mydb.open())QMessageBox::warning(this,"File Not Found Error", "The database file cannot be find.");
+    else{
+        QSqlQuery query;
+        if(query.exec("INSERT INTO studentList VALUES('"+firstname+"', '"+lastname+"', '"+DOB+"', '"+dayOfLessons+"', '"+startdate+"', '"+pricing+"', '"+lengthoflessons+"', '"+username+"');")){
+            QMessageBox::information(this,"Success","This student has been added.");
+            mydb.close();
+        }
+    }
+
 }

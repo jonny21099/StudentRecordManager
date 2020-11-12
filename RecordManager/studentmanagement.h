@@ -12,10 +12,14 @@ class studentManagement : public QDialog
     Q_OBJECT
 
 public:
-    explicit studentManagement(QWidget *parent = nullptr);
+    explicit studentManagement(QString username, QWidget *parent = nullptr);
     ~studentManagement();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
+    QString username;
     Ui::studentManagement *ui;
 };
 

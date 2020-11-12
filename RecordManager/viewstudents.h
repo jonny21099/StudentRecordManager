@@ -20,6 +20,8 @@ public:
 private slots:
     void on_addStudent_clicked();
 
+    void on_removeStudent_clicked();
+
 private:
     QString username;
     Ui::viewStudents *ui;
