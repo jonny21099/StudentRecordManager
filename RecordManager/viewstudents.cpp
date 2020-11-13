@@ -16,7 +16,6 @@ viewStudents::viewStudents(QString username, QWidget *parent) :
     this->username = username;
     ui->setupUi(this);
     refreshwindow();
-
 }
 
 viewStudents::~viewStudents()
@@ -40,6 +39,7 @@ void viewStudents::on_addStudent_clicked()
 {
     studentWindow = new studentManagement(username,this);
     studentWindow->show();
+    connect(studentWindow,SIGNAL(updateDatabase()),this, SLOT(refreshwindow()));
 }
 
 
@@ -67,6 +67,7 @@ void viewStudents::refreshwindow()
     QSqlQueryModel *modal = new QSqlQueryModel();
     QSqlDatabase tempdb = QSqlDatabase::addDatabase("QSQLITE");
     tempdb.setDatabaseName("accounts.db");
+    qDebug()<<("Connect function");
     if(tempdb.open()){
         QSqlQuery tempquery;
         tempquery.exec("SELECT firstname, lastname, DOB, Day_of_lessons, Start_date, Price_per_lesson, Length_of_lessons from studentList WHERE teacher = '"+username+"';");

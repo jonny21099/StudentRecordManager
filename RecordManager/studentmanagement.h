@@ -17,6 +17,8 @@ public:
 public slots:
     void on_buttonBox_accepted();
 
+signals:
+    void updateDatabase();
 private:
     QString username;
     Ui::studentManagement *ui;
