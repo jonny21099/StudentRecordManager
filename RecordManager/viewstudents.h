@@ -16,10 +16,12 @@ public:
     explicit viewStudents(QString username, QWidget *parent = nullptr);
     ~viewStudents();
 
+public slots:
+    void refreshwindow();
 
-private slots:
     void on_addStudent_clicked();
 
+private slots:
     void on_removeStudent_clicked();
 
 private:

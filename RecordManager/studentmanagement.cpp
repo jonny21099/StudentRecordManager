@@ -44,7 +44,6 @@ void studentManagement::on_buttonBox_accepted()
     else{
         QSqlQuery query;
         if(query.exec("INSERT INTO studentList VALUES('"+firstname+"', '"+lastname+"', '"+DOB+"', '"+dayOfLessons+"', '"+startdate+"', '"+pricing+"', '"+lengthoflessons+"', '"+username+"');")){
-            QMessageBox::information(this,"Success","This student has been added.");
             mydb.close();
         }
     }

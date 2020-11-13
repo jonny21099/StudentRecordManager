@@ -2,6 +2,12 @@
 #include "ui_viewstudents.h"
 #include <QtSql>
 #include <QMessageBox>
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+
 
 viewStudents::viewStudents(QString username, QWidget *parent) :
     QDialog(parent),
@@ -9,21 +15,8 @@ viewStudents::viewStudents(QString username, QWidget *parent) :
 {
     this->username = username;
     ui->setupUi(this);
-    QSqlQueryModel *modal = new QSqlQueryModel();
-    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("accounts.db");
-    if(mydb.open()){
-        QSqlQuery query;
-        query.exec("SELECT firstname, lastname, DOB, Day_of_lessons, Start_date, Price_per_lesson, Length_of_lessons from studentList WHERE teacher = '"+username+"';");
-        modal->setQuery(query);
-        ui->tableView->setModel(modal);
-        ui->tableView->resizeColumnsToContents();
-        ui->tableView->resizeRowsToContents();
-        mydb.close();
-    }
-    else{
-        QMessageBox::warning(this,"Error","Something unexpected happened.");
-    }
+    refreshwindow();
+
 }
 
 viewStudents::~viewStudents()
@@ -46,26 +39,9 @@ viewStudents::~viewStudents()
 void viewStudents::on_addStudent_clicked()
 {
     studentWindow = new studentManagement(username,this);
-    connect(studentWindow,SIGNAL(accepted()),this,SLOT(exec()));
     studentWindow->show();
-    qDebug()<<(studentWindow->result());
-    if(studentWindow->result()==1){
-        qDebug()<<("here");
-        QSqlQueryModel *modal = new QSqlQueryModel();
-        QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName("accounts.db");
-        if(mydb.open()){
-            QSqlQuery query;
-            query.exec("SELECT firstname, lastname, DOB, Day_of_lessons, Start_date, Price_per_lesson, Length_of_lessons from studentList WHERE teacher = '"+username+"';");
-            modal->setQuery(query);
-            ui->tableView->setModel(modal);
-            mydb.close();
-        }
-        else{
-            QMessageBox::warning(this,"Error","Something unexpected happened.");
-        }
-    }
 }
+
 
 void viewStudents::on_removeStudent_clicked()
 {
@@ -81,10 +57,27 @@ void viewStudents::on_removeStudent_clicked()
     if(mydb.open()){
         QSqlQuery query;
         query.exec("DELETE FROM studentList WHERE firstname = '"+firstname+"' AND lastname = '"+lastname+"' AND DOB = '"+DOB+"' AND teacher = '"+username+"';");
-        query.exec("SELECT firstname, lastname, DOB, Day_of_lessons, Start_date, Price_per_lesson, Length_of_lessons from studentList WHERE teacher = '"+username+"';");
-        QSqlQueryModel *modal = new QSqlQueryModel();
-        modal->setQuery(query);
-        ui->tableView->setModel(modal);
+        mydb.close();
+        refreshwindow();
     }
-    else QMessageBox::warning(this,"Error","Something unexpected has happened");
+}
+
+void viewStudents::refreshwindow()
+{
+    QSqlQueryModel *modal = new QSqlQueryModel();
+    QSqlDatabase tempdb = QSqlDatabase::addDatabase("QSQLITE");
+    tempdb.setDatabaseName("accounts.db");
+    if(tempdb.open()){
+        QSqlQuery tempquery;
+        tempquery.exec("SELECT firstname, lastname, DOB, Day_of_lessons, Start_date, Price_per_lesson, Length_of_lessons from studentList WHERE teacher = '"+username+"';");
+        modal->setQuery(tempquery);
+        ui->tableView->setModel(modal);
+        ui->tableView->resizeColumnsToContents();
+        ui->tableView->resizeRowsToContents();
+        tempdb.close();
+    }
+    else{
+        QMessageBox::warning(this,"Error","Something unexpected has happened.");
+    }
+
 }

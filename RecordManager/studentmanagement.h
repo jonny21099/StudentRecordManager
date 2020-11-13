@@ -14,8 +14,7 @@ class studentManagement : public QDialog
 public:
     explicit studentManagement(QString username, QWidget *parent = nullptr);
     ~studentManagement();
-
-private slots:
+public slots:
     void on_buttonBox_accepted();
 
 private:

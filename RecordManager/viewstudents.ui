@@ -69,7 +69,7 @@
     <string>Add</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="editStudent">
+  <widget class="QPushButton" name="removeStudent">
    <property name="geometry">
     <rect>
      <x>570</x>
@@ -82,7 +82,7 @@
     <string>Remove</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="removeStudent">
+  <widget class="QPushButton" name="editStudent">
    <property name="geometry">
     <rect>
      <x>351</x>

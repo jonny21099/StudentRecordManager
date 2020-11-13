@@ -1,5 +1,6 @@
 #include "calendar.h"
 #include "ui_calendar.h"
+#include <QPainter>
 
 Calendar::Calendar(QWidget *parent) :
     QDialog(parent),
@@ -7,7 +8,6 @@ Calendar::Calendar(QWidget *parent) :
 {
     ui->setupUi(this);
 }
-
 Calendar::~Calendar()
 {
     delete ui;
