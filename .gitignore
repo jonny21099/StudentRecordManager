@@ -32,4 +32,5 @@
 *.app
 
 # Project Specific
+*.db
 /build-RecordManager-Desktop-Debug/*
