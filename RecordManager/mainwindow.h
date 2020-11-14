@@ -34,6 +34,8 @@ private slots:
 
     void on_option5_clicked();
 
+    void refreshRegisterWindow();
+
 private:
     Ui::MainWindow *ui;
     Register *registerWindow;

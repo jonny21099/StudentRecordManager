@@ -5,6 +5,13 @@
 #include <regex>
 
 using namespace std;
+/**
+ * Constructor
+ * @param username
+ * @param password
+ * @param parent
+ */
+
 modifyPassword::modifyPassword(QString username, QString password, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::modifyPassword)
@@ -18,6 +25,10 @@ modifyPassword::~modifyPassword()
 {
     delete ui;
 }
+
+/**
+ * Change current password
+ */
 
 void modifyPassword::on_buttonBox_accepted()
 {

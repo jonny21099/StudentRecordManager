@@ -15,6 +15,9 @@ public:
     explicit Register(QWidget *parent = nullptr);
     ~Register();
 
+signals:
+    void checkfailed();
+
 private slots:
     void on_buttonBox_accepted();
 

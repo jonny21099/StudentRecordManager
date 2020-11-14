@@ -3,6 +3,12 @@
 #include <QMessageBox>
 #include <QtSql>
 
+/**
+ * Constructor
+ * Add certain labels and text fonts for the studentManagement page
+ * @param username
+ * @param parent
+ */
 studentManagement::studentManagement(QString username, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::studentManagement)
@@ -28,9 +34,11 @@ studentManagement::~studentManagement()
     delete ui;
 }
 
+/**
+ * Add new student to the database
+ */
 void studentManagement::on_buttonBox_accepted()
 {
-    qDebug()<<("HEre first");
     QString firstname = ui->firstname->text();
     QString lastname = ui->lastname->text();
     QString DOB = ui->dateofbirth->text();
@@ -40,7 +48,6 @@ void studentManagement::on_buttonBox_accepted()
     QString lengthoflessons = ui->lengthoflessons->text();
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("accounts.db");
-    qDebug()<<("non-connect function");
     if(!mydb.open())QMessageBox::warning(this,"File Not Found Error", "The database file cannot be find.");
     else{
         QSqlQuery query;

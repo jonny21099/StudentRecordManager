@@ -2,13 +2,12 @@
 #include "ui_viewstudents.h"
 #include <QtSql>
 #include <QMessageBox>
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#include <unistd.h>
-#endif
 
-
+/**
+ * Constructor
+ * @param username
+ * @param parent
+ */
 viewStudents::viewStudents(QString username, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::viewStudents)
@@ -23,18 +22,10 @@ viewStudents::~viewStudents()
     delete ui;
 }
 
-//void viewStudents::on_tableView_doubleClicked(const QModelIndex &index)
-//{
-//    QString val = ui->tableView->model()->data(index).toString();
-//    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-//    mydb.setDatabaseName("accounts.db");
-//    qDebug()<<(val);
-//}
-
-//CREATE TABLE studentList(firstname string, lastname string, DOB datetime, Day_of_lessons string, Start_date datetime, Price_per_lesson int, Length_of_lessons int, teacher FOREIGN KEY REFERENCES loginInfo(username));
-
-
-
+/**
+ * Create an object of class studentManagement and display it
+ * If updateDatabase signal is received call refreshwindow slot
+ */
 void viewStudents::on_addStudent_clicked()
 {
     studentWindow = new studentManagement(username,this);
@@ -42,7 +33,9 @@ void viewStudents::on_addStudent_clicked()
     connect(studentWindow,SIGNAL(updateDatabase()),this, SLOT(refreshwindow()));
 }
 
-
+/**
+ * Remove student from tableview
+ */
 void viewStudents::on_removeStudent_clicked()
 {
     QModelIndex index = ui->tableView->currentIndex();
@@ -62,12 +55,14 @@ void viewStudents::on_removeStudent_clicked()
     }
 }
 
+/**
+ * refresh the tableview used to display students
+ */
 void viewStudents::refreshwindow()
 {
     QSqlQueryModel *modal = new QSqlQueryModel();
     QSqlDatabase tempdb = QSqlDatabase::addDatabase("QSQLITE");
     tempdb.setDatabaseName("accounts.db");
-    qDebug()<<("Connect function");
     if(tempdb.open()){
         QSqlQuery tempquery;
         tempquery.exec("SELECT firstname, lastname, DOB, Day_of_lessons, Start_date, Price_per_lesson, Length_of_lessons from studentList WHERE teacher = '"+username+"';");

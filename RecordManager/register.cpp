@@ -5,7 +5,13 @@
 #include <QTextStream>
 #include <regex>
 
+/**
+  * SCHEMA FOR DATABASE
+  * CREATE TABLE loginInfo(firstname string, lastname string, username string, password string);
+  * CREATE TABLE studentList(firstname string, lastname string, DOB string, Day_of_lessons string, Start_date string, Price_per_lesson int, Length_of_lessons int, teacher string, FOREIGN KEY(teacher) REFERENCES loginInfo(username));
+  */
 using namespace std;
+
 Register::Register(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Register)
@@ -18,6 +24,9 @@ Register::~Register()
     delete ui;
 }
 
+/**
+ * Registers user account
+ */
 void Register::on_buttonBox_accepted()
 {
     QString firstName = ui->firstName->text();
@@ -27,12 +36,17 @@ void Register::on_buttonBox_accepted()
     QString repassword = ui->rPassWord->text();
     regex passwordcheck("^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,}$");
     if(firstName == "" || lastName == "" || username == "" || password == "" || repassword == ""){
+        emit(checkfailed());
         QMessageBox::warning(this,"Error", "Please make sure all fields are filled.");
     }
     else if(password != repassword){
+        emit(checkfailed());
         QMessageBox::warning(this,"Error","Your passwords do not match!");
     }
-    else if(!regex_match(password.toStdString(),passwordcheck)) QMessageBox::warning(this,"Error","Your password must contain minimum eight characters, at least one letter and one number.");
+    else if(!regex_match(password.toStdString(),passwordcheck)){
+        emit(checkfailed());
+        QMessageBox::warning(this,"Error","Your password must contain minimum eight characters, at least one letter and one number.");
+    }
     else{
         QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
         mydb.setDatabaseName("accounts.db");
@@ -45,8 +59,9 @@ void Register::on_buttonBox_accepted()
                 QMessageBox::warning(this,"Error:constraint error","This username already exists, please enter a unique username.");
             }
             else{
-                QMessageBox::information(this,"Success","Your accounts successfully registered.");
+                QMessageBox::information(this,"Success","Your account is successfully registered.");
             }
         }
     }
 }
+
