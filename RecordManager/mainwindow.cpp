@@ -11,6 +11,19 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("accounts.db");
+    mydb.open();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM loginInfo");
+    if(!query.exec()){
+        query.exec("CREATE TABLE loginInfo(firstname string, lastname string, username string, password string);");
+    }
+    query.prepare("SELECT * from studentList");
+    if(!query.exec()){
+        query.exec("CREATE TABLE studentList(firstname string, lastname string, DOB string, Day_of_lessons string, Start_date string, Price_per_lesson int, Length_of_lessons int, teacher string, FOREIGN KEY(teacher) REFERENCES loginInfo(username));");
+    }
+    mydb.close();
 }
 
 MainWindow::~MainWindow()
