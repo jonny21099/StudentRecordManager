@@ -34,7 +34,6 @@ A C++ management software for teachers that records information about students a
 ![Screenshot from 2020-11-13 22-16-56](https://user-images.githubusercontent.com/43177180/99140309-f4dcd980-25fd-11eb-9fd9-70a047a2a05d.png)
 
 ## Creating an executable program
-### Linux
 1. Download the repository.
 
 2. Open the repository in QtCreator.
@@ -43,12 +42,31 @@ A C++ management software for teachers that records information about students a
 
 ![Screenshot from 2020-11-13 22-25-04](https://user-images.githubusercontent.com/43177180/99140465-8a2c9d80-25ff-11eb-99d7-0b63ccfdac30.png)
 
-4. Open terminal and cd to the repository.
+The following steps differ between windows and linux.
 
-5. 
+### Linux
+4. Open terminal and cd to the directory.
+
+5. ``` ./RecordManager.pro ```
+
+### Windows
+4. Go to the folder where the project was built.
+
+5. Copy the RecordManager application and the accounts.db file into a new folder.
+
+![image](https://user-images.githubusercontent.com/43177180/99141351-e398ca80-2607-11eb-998b-48c705964657.png)
+
+6. Open MinGW.
+
+![image](https://user-images.githubusercontent.com/43177180/99141369-04612000-2608-11eb-856b-6bbcc4173987.png)
+
+7. cd to the folder where the project was built and windeployqt RecordManager.exe.
+
 ```
-./RecordManager.pro
+cd "C:\Users\admin\builtDirectory"
+windeployqt RecordManager.exe
 ```
+8. Run RecordManager.exe.
 
 ## Contributions
 
