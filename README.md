@@ -70,6 +70,6 @@ windeployqt RecordManager.exe
 
 ## Contributions
 
-For more information about QT checkout their program and plans [here](qt.io)
+For more information about QT checkout their program and plans [here](ww.qt.io)
 
-[More information](doc.qt.io) on the QT documentation.
+[More information](www.doc.qt.io) on the QT documentation.
